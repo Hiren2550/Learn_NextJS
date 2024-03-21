@@ -29,3 +29,15 @@ export const PATCH = async (req, { params }) => {
     return NextResponse.json(error);
   }
 };
+export const PUT = async (req, { params }) => {
+  try {
+    const { taskId } = await params;
+    const data = await req.json();
+    const res = await Task.findOneAndReplace({ _id: taskId }, data, {
+      new: true,
+    });
+    return NextResponse.json(res, { status: "200", statusText: "replaced" });
+  } catch (error) {
+    return NextResponse.json(error);
+  }
+};
