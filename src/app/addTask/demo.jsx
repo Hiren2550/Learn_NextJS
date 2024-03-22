@@ -5,6 +5,7 @@ import TaskSVG from "../../../public/addTaskSVG.svg";
 import Image from "next/image";
 
 const Demo = () => {
+  const [load, setLoad] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState("pending");
@@ -13,11 +14,27 @@ const Demo = () => {
     title: title,
     content: content,
     status: status,
-    userId: " ",
+    userId: "65fc5e2e4bbbc6157a131b50",
   };
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    //console.log(formData);
+    try {
+      setLoad(true);
+      const res = await fetch("/api/Tasks", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
+      setLoad(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoad(false);
+    }
   };
 
   return (
@@ -74,7 +91,7 @@ const Demo = () => {
           </div>
           <div className="flex gap-3 justify-center mt-2 text-white">
             <button className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
-              add task
+              {load ? "loading..." : "add Task"}
             </button>
             <button className="bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
               reset
