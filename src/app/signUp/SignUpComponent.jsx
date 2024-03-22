@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function SignUpComponent() {
   //console.log("Sign-up");
+  const router = useRouter();
   const [load, setLoad] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,9 +20,42 @@ function SignUpComponent() {
     about: about,
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    //console.log(formData);
+    if (
+      formData.name.trim() === "" ||
+      formData.email.trim() === "" ||
+      formData.password.trim() === "" ||
+      formData.about.trim() === ""
+    ) {
+      toast.warning("Please enter valid field", {
+        position: "top-center",
+      });
+    }
+    try {
+      setLoad(true);
+      const res = await fetch("/api/users/create", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json().then((value) => {
+        toast.success("User is registered", { theme: "dark" });
+      });
+      setName("");
+      setEmail("");
+      setPassword("");
+      setAbout("");
+      setLoad(false);
+      router.push("/login");
+    } catch (error) {
+      //console.log(error);
+      toast.error(error.message);
+      setLoad(false);
+    }
   };
   return (
     <main className=" flex flex-col py-10 px-6 bg-gradient-to-b from-gray-500 to-gray-700 text-white">

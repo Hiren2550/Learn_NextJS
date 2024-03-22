@@ -1,10 +1,18 @@
 import { User } from "@/models/user";
 import { NextResponse } from "next/server";
+import bcryptjs from "bcryptjs";
+import { jwt } from "jsonwebtoken";
 
 export const POST = async (req) => {
   try {
     const data = await req.json();
-    const user = new User(data);
+    let { password, name, email, about } = data;
+    const hashedPassword = bcryptjs.hashSync(password, 12);
+    // console.log("pass", password);
+    // console.log(hashedPassword);
+    password = hashedPassword;
+
+    const user = new User({ name, email, about, password });
     const res = await user.save();
     return NextResponse.json(res);
   } catch (error) {

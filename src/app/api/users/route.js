@@ -12,16 +12,16 @@ export const GET = async (req) => {
     return NextResponse.json(error);
   }
 };
-export const POST = async (req) => {
-  //console.log(req.body);
-  //console.log(req.method);
-  // console.log(req.nextUrl.pathname);
-  // console.log(req.nextUrl.searchParams);
-  // console.log(req.headers.get("X-Forwarded-For"));
-  console.log(req.json());
+// export const POST = async (req) => {
+//   //console.log(req.body);
+//   //console.log(req.method);
+//   // console.log(req.nextUrl.pathname);
+//   // console.log(req.nextUrl.searchParams);
+//   // console.log(req.headers.get("X-Forwarded-For"));
+//   console.log(req.json());
 
-  return NextResponse.json({ message: "POST REQUEST BY USERS" });
-};
+//   return NextResponse.json({ message: "POST REQUEST BY USERS" });
+// };
 export const DELETE = async (req) => {
   return NextResponse.json(
     { message: "DELETE REQUEST BY USERS" },

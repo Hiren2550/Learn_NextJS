@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 function LoginComponent() {
   const [load, setLoad] = useState(false);
@@ -15,7 +16,12 @@ function LoginComponent() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (formData.email.trim() === "" || formData.password.trim() === "") {
+      toast.warning("Please enter field", {
+        position: "top-center",
+        theme: "dark",
+      });
+    }
   };
   return (
     <main className=" flex flex-col py-10 px-6 bg-gradient-to-b from-gray-500 to-gray-700 text-white">
