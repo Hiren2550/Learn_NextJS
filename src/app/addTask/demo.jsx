@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import loginSVG from "../../../public/loginSVG.svg";
 import TaskSVG from "../../../public/addTaskSVG.svg";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 const Demo = () => {
   const [load, setLoad] = useState(false);
@@ -30,13 +31,24 @@ const Demo = () => {
       });
       const data = await res.json();
       console.log(data);
+      toast.success("your task is added", { position: "top-center" });
+      setTitle("");
+      setContent("");
+      setStatus("");
       setLoad(false);
     } catch (error) {
       console.log(error.message);
+      toast.error("Error on adding task", { position: "top-center" });
       setLoad(false);
     }
   };
 
+  const handleReset = (e) => {
+    e.preventDefault();
+    setTitle("");
+    setContent("");
+    setStatus("");
+  };
   return (
     <main className=" flex flex-col py-10 px-6 bg-gradient-to-b from-gray-500 to-gray-700 text-white">
       <div className="max-w-lg mx-auto py-3 gap-3">
@@ -93,7 +105,10 @@ const Demo = () => {
             <button className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
               {load ? "loading..." : "add Task"}
             </button>
-            <button className="bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
+            <button
+              onClick={handleReset}
+              className="bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
+            >
               reset
             </button>
           </div>
