@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function LoginComponent() {
+  const router = useRouter();
   const [load, setLoad] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,13 +16,39 @@ function LoginComponent() {
     password: password,
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (formData.email.trim() === "" || formData.password.trim() === "") {
       toast.warning("Please enter field", {
         position: "top-center",
         theme: "dark",
       });
+    } else {
+      try {
+        setLoad(true);
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        //console.log(data);
+        setEmail("");
+        setPassword("");
+        setLoad(false);
+        if (data.success === true) {
+          toast.success("logged In");
+          router.push("/profile/user");
+        } else {
+          toast.error(data.message);
+          setLoad(false);
+        }
+      } catch (error) {
+        toast.error(error.message, { position: "top-center" });
+        setLoad(false);
+      }
     }
   };
   return (

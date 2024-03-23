@@ -14,9 +14,16 @@ export const POST = async (req) => {
 
     const user = new User({ name, email, about, password });
     const res = await user.save();
-    return NextResponse.json(res);
+    return NextResponse.json({
+      res,
+      message: "Sign Up Sucesss",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
-    return NextResponse.json(error);
+    return NextResponse.json({
+      message: error.message,
+      success: false,
+    });
   }
 };

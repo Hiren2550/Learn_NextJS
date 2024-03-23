@@ -32,29 +32,34 @@ function SignUpComponent() {
       toast.warning("Please enter valid field", {
         position: "top-center",
       });
-    }
-    try {
-      setLoad(true);
-      const res = await fetch("/api/users/create", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json().then((value) => {
-        toast.success("User is registered", { theme: "dark" });
-      });
-      setName("");
-      setEmail("");
-      setPassword("");
-      setAbout("");
-      setLoad(false);
-      router.push("/login");
-    } catch (error) {
-      //console.log(error);
-      toast.error(error.message);
-      setLoad(false);
+    } else {
+      try {
+        setLoad(true);
+        const res = await fetch("/api/users/create", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAbout("");
+        setLoad(false);
+        if (data.success === true) {
+          router.push("/login");
+          setLoad(false);
+        } else {
+          toast.error(data.message);
+          setLoad(false);
+        }
+      } catch (error) {
+        //console.log(error);
+        toast.error(error.message);
+        setLoad(false);
+      }
     }
   };
   return (

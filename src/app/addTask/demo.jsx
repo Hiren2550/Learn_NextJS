@@ -101,13 +101,13 @@ const Demo = () => {
               </option>
             </select>
           </div>
-          <div className="flex gap-3 justify-center mt-2 text-white">
-            <button className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
+          <div className="flex gap-3 justify-center mt-2 text-white mx-auto w-full max-w-lg">
+            <button className="w-1/2 bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-70 uppercase">
               {load ? "loading..." : "add Task"}
             </button>
             <button
               onClick={handleReset}
-              className="bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
+              className="w-1/2 bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
             >
               reset
             </button>
