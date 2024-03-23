@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = (token) => {
   const [login, setLogin] = useState(false);
 
   return (
@@ -44,40 +44,42 @@ const Navbar = () => {
       </div>
 
       <div>
-        <ul className="flex items-center gap-3 justify-between">
-          <li>
-            <Link
-              href={"/login"}
-              className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
-            >
-              login
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={"/signUp"}
-              className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
-            >
-              SignUp
-            </Link>
-          </li>
-        </ul>
+        {!login && (
+          <ul className="flex items-center gap-3 justify-between">
+            <li>
+              <Link
+                href={"/login"}
+                className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
+              >
+                login
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={"/signUp"}
+                className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase"
+              >
+                SignUp
+              </Link>
+            </li>
+          </ul>
+        )}
+        {login && (
+          <div>
+            <form className="flex items-center gap-2 text-white">
+              <input
+                type="text"
+                placeholder="Search..."
+                name="searchbox"
+                className="w-fit px-2 py-1 rounded-lg focus:outline-none border border-gray-500 bg-transparent"
+              />
+              <button className="bg-green-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
+                Search
+              </button>
+            </form>
+          </div>
+        )}
       </div>
-      {login && (
-        <div>
-          <form className="flex items-center gap-2 text-white">
-            <input
-              type="text"
-              placeholder="Search..."
-              name="searchbox"
-              className="w-fit px-2 py-1 rounded-lg focus:outline-none border border-gray-500 bg-transparent"
-            />
-            <button className="bg-green-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
-              Search
-            </button>
-          </form>
-        </div>
-      )}
     </nav>
   );
 };

@@ -53,6 +53,7 @@ function SignUpComponent() {
           setLoad(false);
         } else {
           toast.error(data.message);
+          //console.log(data.message)
           setLoad(false);
         }
       } catch (error) {

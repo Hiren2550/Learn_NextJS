@@ -7,8 +7,15 @@ export const GET = async (req, { params }) => {
     const ID = params.userId;
 
     const res = await User.findById(ID).select("-password");
-    return NextResponse.json(res);
+    return NextResponse.json({
+      res,
+      message: "data fetch done",
+      success: true,
+    });
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json({
+      message: error,
+      success: false,
+    });
   }
 };
