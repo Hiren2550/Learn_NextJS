@@ -35,12 +35,10 @@ function LoginComponent() {
         });
         const data = await res.json();
         //console.log(data);
-        setEmail("");
-        setPassword("");
         setLoad(false);
         if (data.success === true) {
-          toast.success("logged In");
           router.push("/profile/user");
+          toast.success("logged In");
         } else {
           toast.error(data.message);
           setLoad(false);

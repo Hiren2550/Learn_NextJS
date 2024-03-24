@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
+import { connectDB } from "@/lib/db";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -12,6 +13,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  connectDB();
   return (
     <html lang="en">
       <head>

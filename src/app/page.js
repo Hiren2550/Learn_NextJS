@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 export const metadata = {
   title: "Home : work manager",
 };

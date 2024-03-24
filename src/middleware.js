@@ -7,6 +7,12 @@ export function middleware(req) {
   const access_token = req.cookies.get("access_token")?.value;
   //console.log(access_token);
 
+  if (
+    req.nextUrl.pathname === "/api/login" ||
+    req.nextUrl.pathname === "/api/users/create"
+  ) {
+    return;
+  }
   const LoggedUserAccessPaths =
     req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signUp";
   if (LoggedUserAccessPaths) {
@@ -24,6 +30,7 @@ export function middleware(req) {
 export const config = {
   matcher: [
     "/",
+    "/api/:path*",
     "/addTask",
     "/login",
     "/signUp",

@@ -26,11 +26,6 @@ export async function POST(req) {
       httpOnly: true,
       secure: false,
     });
-    response.cookies.set("current_User", user._id, {
-      expiresIn: "1d",
-      httpOnly: true,
-      secure: false,
-    });
     return response;
   } catch (error) {
     return NextResponse.json(
