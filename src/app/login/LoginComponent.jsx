@@ -4,6 +4,7 @@ import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginComponent() {
   const router = useRouter();
@@ -39,7 +40,7 @@ function LoginComponent() {
         if (data.success === true) {
           router.refresh();
           router.push("/profile/user", { reload: true });
-          toast.success("logged In");
+          //toast.success("logged In");
         } else {
           toast.error(data.message);
           setLoad(false);
@@ -83,20 +84,19 @@ function LoginComponent() {
               value={password}
             />
           </div>
-          <div className="flex gap-3 mt-2 justify-center text-white">
-            <div className="w-full max-w-lg gap-3 flex">
-              <input
-                type="checkbox"
-                name="verify"
-                className="w-4 bg-transparent border border-black"
-              />
-              <p>above details are correct</p>
-            </div>
-          </div>
-          <div className="flex gap-3 justify-center mt-2 text-white">
+
+          <div className="flex flex-col items-center gap-3  mt-2 text-white">
             <button className="w-full max-w-lg bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
               {load ? "loading" : "Login"}
             </button>
+            <p>
+              Dont have an account?
+              <Link href="/signUp">
+                <span className="text-blue-500 cursor-pointer m-1">
+                  Sign Up
+                </span>
+              </Link>
+            </p>
           </div>
         </form>
       </div>

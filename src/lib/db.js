@@ -6,7 +6,7 @@ export const connectDB = async () => {
     const { connection } = await mongoose.connect(process.env.MONGO_URL, {
       dbName: "Work_Manager",
     });
-    console.log("DB connection successfull!!");
+    //console.log("DB connection successfull!!");
 
     // const user1 = new User({
     //   name: "hiren",

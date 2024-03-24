@@ -4,6 +4,7 @@ import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function SignUpComponent() {
   //console.log("Sign-up");
@@ -119,10 +120,16 @@ function SignUpComponent() {
             />
           </div>
 
-          <div className="flex gap-3 justify-center mt-2 text-white">
+          <div className="flex flex-col gap-3 items-center mt-2 text-white">
             <button className="w-full max-w-lg bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80 uppercase">
               {load ? "loading" : "Sign Up"}
             </button>
+            <p>
+              Have an account?
+              <Link href="/login">
+                <span className="text-blue-500 cursor-pointer m-1">Log In</span>
+              </Link>
+            </p>
           </div>
         </form>
       </div>

@@ -2,12 +2,36 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import { userContext } from "@/context/userContext";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { user } = useContext(userContext);
+  const router = useRouter();
+
   if (user) {
-    console.log(user);
+    //console.log(user);
   }
+  const logOut = async (e) => {
+    e.preventDefault();
+    router.replace("/login");
+    try {
+      const res = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      const data = await res.json();
+      //console.log(data);
+      if (data.success === true) {
+        router.refresh();
+        toast.success("log out successfully");
+      }
+    } catch (error) {
+      toast.error("Error in log out");
+    }
+  };
 
   return (
     <nav className="flex justify-between items-center bg-black text-white h-20 px-5 py-3">
@@ -20,7 +44,11 @@ const Navbar = () => {
             height={50}
           />
         </Link>
-        <h1 className="text-3xl font-semibold">HS</h1>
+        {user ? (
+          <h1 className="text-3xl font-semibold">{user.name}</h1>
+        ) : (
+          <h1 className="text-3xl font-semibold">User</h1>
+        )}
       </div>
       <div className="hidden lg:flex">
         <ul className="flex gap-5">
@@ -80,7 +108,10 @@ const Navbar = () => {
               <button className="bg-green-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
                 Search
               </button>
-              <button className="bg-blue-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
+              <button
+                className="bg-blue-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80"
+                onClick={logOut}
+              >
                 log Out
               </button>
             </form>
