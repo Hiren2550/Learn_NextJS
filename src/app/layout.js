@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
 import { connectDB } from "@/lib/db";
+import { UserProvider } from "@/context/userContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,10 +21,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={inter.className}>
-        <ToastContainer className="text-blue-700" />
-        <Navbar />
-        {children}
-        <Footer />
+        <UserProvider>
+          <ToastContainer className="text-blue-700" />
+          <Navbar />
+          {children}
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );

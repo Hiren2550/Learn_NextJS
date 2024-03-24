@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
+import { userContext } from "@/context/userContext";
 
 const Navbar = () => {
-  const [login, setLogin] = useState(false);
+  const { user } = useContext(userContext);
+  if (user) {
+    console.log(user);
+  }
 
   return (
     <nav className="flex justify-between items-center bg-black text-white h-20 px-5 py-3">
@@ -18,7 +22,7 @@ const Navbar = () => {
         </Link>
         <h1 className="text-3xl font-semibold">HS</h1>
       </div>
-      <div className="hidden sm:flex">
+      <div className="hidden lg:flex">
         <ul className="flex gap-5">
           <Link href="/">
             <li className="capitalize cursor-pointer hover:underline hover:scale-105">
@@ -44,7 +48,7 @@ const Navbar = () => {
       </div>
 
       <div>
-        {!login && (
+        {!user && (
           <ul className="flex items-center gap-3 justify-between">
             <li>
               <Link
@@ -64,17 +68,20 @@ const Navbar = () => {
             </li>
           </ul>
         )}
-        {login && (
+        {user && (
           <div>
             <form className="flex items-center gap-2 text-white">
               <input
                 type="text"
                 placeholder="Search..."
                 name="searchbox"
-                className="w-fit px-2 py-1 rounded-lg focus:outline-none border border-gray-500 bg-transparent"
+                className="w-40 px-2 py-1 rounded-lg focus:outline-none border border-gray-500 bg-transparent"
               />
               <button className="bg-green-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
                 Search
+              </button>
+              <button className="bg-blue-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
+                log Out
               </button>
             </form>
           </div>

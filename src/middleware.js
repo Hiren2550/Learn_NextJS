@@ -9,7 +9,8 @@ export function middleware(req) {
 
   if (
     req.nextUrl.pathname === "/api/login" ||
-    req.nextUrl.pathname === "/api/users/create"
+    req.nextUrl.pathname === "/api/users/create" ||
+    req.nextUrl.pathname === "/api/current"
   ) {
     return;
   }

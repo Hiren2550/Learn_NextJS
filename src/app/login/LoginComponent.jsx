@@ -37,7 +37,8 @@ function LoginComponent() {
         //console.log(data);
         setLoad(false);
         if (data.success === true) {
-          router.push("/profile/user");
+          router.refresh();
+          router.push("/profile/user", { reload: true });
           toast.success("logged In");
         } else {
           toast.error(data.message);

@@ -49,6 +49,7 @@ function SignUpComponent() {
         setAbout("");
         setLoad(false);
         if (data.success === true) {
+          toast.success("user is registered Successfully");
           router.push("/login");
           setLoad(false);
         } else {
