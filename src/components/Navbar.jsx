@@ -1,20 +1,24 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { userContext } from "@/context/userContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const [load, setLoad] = useState(false);
   const { user } = useContext(userContext);
   const router = useRouter();
 
+  useEffect(() => {
+    setLoad(true);
+  }, [load]);
   if (user) {
     //console.log(user);
   }
   const logOut = async (e) => {
     e.preventDefault();
-    router.replace("/login");
+
     try {
       const res = await fetch("/api/logout", {
         method: "POST",
@@ -50,33 +54,35 @@ const Navbar = () => {
           <h1 className="text-3xl font-semibold">User</h1>
         )}
       </div>
-      <div className="hidden lg:flex">
-        <ul className="flex gap-5">
-          <Link href="/">
-            <li className="capitalize cursor-pointer hover:underline hover:scale-105">
-              home
-            </li>
-          </Link>
-          <Link href="/addTask">
-            <li className="capitalize cursor-pointer hover:underline hover:scale-105">
-              Add Tasks
-            </li>
-          </Link>
-          <Link href="/showTask">
-            <li className="capitalize cursor-pointer hover:underline hover:scale-105">
-              show tasks
-            </li>
-          </Link>
-          <Link href="/about">
-            <li className="capitalize cursor-pointer hover:underline hover:scale-105">
-              about
-            </li>
-          </Link>
-        </ul>
-      </div>
+      {load && user && (
+        <div className="hidden lg:flex">
+          <ul className="flex gap-5">
+            <Link href="/">
+              <li className="capitalize cursor-pointer hover:underline hover:scale-105">
+                home
+              </li>
+            </Link>
+            <Link href="/addTask">
+              <li className="capitalize cursor-pointer hover:underline hover:scale-105">
+                Add Tasks
+              </li>
+            </Link>
+            <Link href="/showTask">
+              <li className="capitalize cursor-pointer hover:underline hover:scale-105">
+                show tasks
+              </li>
+            </Link>
+            <Link href="/about">
+              <li className="capitalize cursor-pointer hover:underline hover:scale-105">
+                about
+              </li>
+            </Link>
+          </ul>
+        </div>
+      )}
 
       <div>
-        {!user && (
+        {load && !user && (
           <ul className="flex items-center gap-3 justify-between">
             <li>
               <Link
@@ -96,7 +102,7 @@ const Navbar = () => {
             </li>
           </ul>
         )}
-        {user && (
+        {load && user && (
           <div>
             <form className="flex items-center gap-2 text-white">
               <input

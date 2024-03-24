@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
 import { connectDB } from "@/lib/db";
 import { UserProvider } from "@/context/userContext";
+import { Suspense } from "react";
+import Loading from "./loading";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,9 +25,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <UserProvider>
           <ToastContainer className="text-blue-700" />
-          <Navbar />
-          {children}
-          <Footer />
+          <Suspense fallback={<Loading />}>
+            <Navbar />
+            {children}
+            <Footer />
+          </Suspense>
         </UserProvider>
       </body>
     </html>

@@ -17,7 +17,7 @@ export async function POST(req) {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
     //console.log(token);
     const response = NextResponse.json({
-      data: user,
+      user: user,
       message: "Logged In",
       success: true,
     });

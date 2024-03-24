@@ -1,12 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import welcomeSVG from "../../../public/welcomSVG.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { userContext } from "@/context/userContext";
 
 function LoginComponent() {
+  const { setUser } = useContext(userContext);
   const router = useRouter();
   const [load, setLoad] = useState(false);
   const [email, setEmail] = useState("");
@@ -38,7 +40,7 @@ function LoginComponent() {
         //console.log(data);
         setLoad(false);
         if (data.success === true) {
-          router.refresh();
+          setUser(data.user);
           router.push("/profile/user", { reload: true });
           //toast.success("logged In");
         } else {
