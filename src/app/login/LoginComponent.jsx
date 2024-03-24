@@ -41,6 +41,7 @@ function LoginComponent() {
         setLoad(false);
         if (data.success === true) {
           setUser(data.user);
+          localStorage.setItem("localUser", JSON.stringify(data.user));
           router.push("/profile/user", { reload: true });
           //toast.success("logged In");
         } else {

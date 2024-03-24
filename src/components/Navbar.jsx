@@ -9,11 +9,9 @@ const Navbar = () => {
   const { user } = useContext(userContext);
   const router = useRouter();
 
-  if (user) {
-    //console.log(user);
-  }
   const logOut = async (e) => {
     e.preventDefault();
+    localStorage.removeItem("localUser");
 
     try {
       const res = await fetch("/api/logout", {
