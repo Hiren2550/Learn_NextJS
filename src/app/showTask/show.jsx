@@ -22,7 +22,7 @@ const Show = () => {
     fetchingData();
   }, []);
   return (
-    <main className=" flex flex-col py-10 px-4 bg-gradient-to-b from-gray-500 to-gray-700 text-white">
+    <main className="min-h-screen flex flex-col py-10 px-4 bg-gradient-to-b from-gray-500 to-gray-700 text-white">
       {laod && (
         <div>
           <h1 className="text-red-600 text-3xl">Loading</h1>

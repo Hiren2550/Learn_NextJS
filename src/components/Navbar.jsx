@@ -6,13 +6,9 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const [load, setLoad] = useState(false);
   const { user } = useContext(userContext);
   const router = useRouter();
 
-  useEffect(() => {
-    setLoad(true);
-  }, [load]);
   if (user) {
     //console.log(user);
   }
@@ -54,7 +50,7 @@ const Navbar = () => {
           <h1 className="text-3xl font-semibold">User</h1>
         )}
       </div>
-      {load && user && (
+      {user && (
         <div className="hidden lg:flex">
           <ul className="flex gap-5">
             <Link href="/">
@@ -82,7 +78,7 @@ const Navbar = () => {
       )}
 
       <div>
-        {load && !user && (
+        {!user && (
           <ul className="flex items-center gap-3 justify-between">
             <li>
               <Link
@@ -102,7 +98,7 @@ const Navbar = () => {
             </li>
           </ul>
         )}
-        {load && user && (
+        {user && (
           <div>
             <form className="flex items-center gap-2 text-white">
               <input

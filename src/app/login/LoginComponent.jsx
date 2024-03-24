@@ -71,6 +71,7 @@ function LoginComponent() {
               type="email"
               placeholder="Enter your email"
               id="email"
+              autoComplete="off"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -81,6 +82,8 @@ function LoginComponent() {
               type="password"
               placeholder="Enter your password"
               id="password"
+              name="password"
+              autoComplete="current-password"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setPassword(e.target.value)}
               value={password}

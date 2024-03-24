@@ -83,6 +83,7 @@ function SignUpComponent() {
               type="text"
               placeholder="Enter your name"
               id="name"
+              autoComplete="off"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setName(e.target.value)}
               value={name}
@@ -93,6 +94,7 @@ function SignUpComponent() {
               type="email"
               placeholder="Enter your email"
               id="email"
+              autoComplete="off"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -103,6 +105,8 @@ function SignUpComponent() {
               type="password"
               placeholder="Enter your password"
               id="password"
+              name="password"
+              autoComplete="off"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
