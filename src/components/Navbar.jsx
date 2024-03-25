@@ -30,7 +30,25 @@ const Navbar = () => {
       toast.error("Error in log out");
     }
   };
-
+  const deleteUser = async (e) => {
+    e.preventDefault();
+    if (user._id) {
+      const id = user._id;
+      try {
+        const res = await fetch(`/api/users/deleteUser/${id}`, {
+          method: "DELETE",
+        });
+        const data = await res.json();
+        if (data.success === true) {
+          //console.log(data);
+          router.refresh();
+          toast.success("User deleted successfully");
+        }
+      } catch (error) {
+        toast.error("error in delete Operation of user");
+      }
+    }
+  };
   return (
     <nav className="flex justify-between items-center bg-black text-white h-20 px-5 py-3">
       <div className="flex items-center gap-2">
@@ -98,6 +116,12 @@ const Navbar = () => {
               <h1 className="text-2xl font-semibold text-blue-900">
                 {user.email}
               </h1>
+              <button
+                className="bg-red-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80"
+                onClick={deleteUser}
+              >
+                Delete Account
+              </button>
               <button
                 className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80"
                 onClick={logOut}

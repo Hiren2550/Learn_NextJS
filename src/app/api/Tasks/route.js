@@ -3,8 +3,8 @@ import { Task } from "@/models/Task";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-await connectDB();
 export const POST = async (req) => {
+  await connectDB();
   //console.log("Task API");
   try {
     const data = await req.json();

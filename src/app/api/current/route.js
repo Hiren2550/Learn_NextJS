@@ -1,8 +1,10 @@
+import { connectDB } from "@/lib/db";
 import { User } from "@/models/user";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
+  await connectDB();
   const token = req.cookies.get("access_token")?.value;
   //console.log(token);
 

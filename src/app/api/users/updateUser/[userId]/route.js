@@ -1,7 +1,9 @@
+import { connectDB } from "@/lib/db";
 import { User } from "@/models/user";
 import { NextResponse } from "next/server";
 
 export const PATCH = async (req, { params }) => {
+  await connectDB();
   try {
     const ID = params.userId;
     const data = await req.json();

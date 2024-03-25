@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
-import { connectDB } from "@/lib/db";
+
 import { UserProvider } from "@/context/userContext";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -16,7 +16,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  connectDB();
   return (
     <html lang="en">
       <head>
