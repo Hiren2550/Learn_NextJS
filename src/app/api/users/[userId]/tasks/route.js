@@ -5,10 +5,7 @@ import { NextResponse } from "next/server";
 export const GET = async (req, { params }) => {
   const { userId } = params;
   try {
-    const user = await User.findById(userId);
-    const res1 = user._doc;
-    const res2 = await Task.find({ userId: userId });
-    const res = { ...res1, ...res2 };
+    const res = await Task.find({ userId: userId });
     return NextResponse.json({
       res,
       status: 200,

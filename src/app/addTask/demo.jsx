@@ -30,7 +30,7 @@ const Demo = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      //console.log(data);
       toast.success("your task is added", { position: "top-center" });
       setTitle("");
       setContent("");
@@ -67,6 +67,7 @@ const Demo = () => {
               type="text"
               placeholder="Enter your task name"
               id="task_title"
+              autoComplete="off"
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
@@ -77,6 +78,7 @@ const Demo = () => {
               type="text"
               placeholder="write content here!!"
               id="task_content"
+              autoComplete="off"
               cols={2}
               className="rounded px-3 py-2 focus:outline-none w-full bg-transparent border border-black"
               onChange={(e) => setContent(e.target.value)}
