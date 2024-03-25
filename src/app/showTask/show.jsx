@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import swal from "sweetalert";
 
 const Show = () => {
   //console.log("show page");
@@ -59,12 +60,17 @@ const Show = () => {
           <h1>No Task is added</h1>
         </div>
       )}
-      <div className=" flex flex-col gap-3">
+      <div className="flex flex-col gap-3 w-full">
+        <h2 className="font-semibold text-center">
+          {!load && `Your All Tasks(${TaskData.length})`}
+        </h2>
         {TaskData &&
           TaskData.map((task) => (
             <div
               key={task._id}
-              className="bg-gray-200 text-black p-5 relative hover:bg-gray-300 "
+              className={`text-black p-5 relative rounded-lg ${
+                task.status === "completed" ? "bg-green-600" : "bg-gray-400"
+              }`}
             >
               <FaDeleteLeft
                 size={30}
@@ -72,19 +78,19 @@ const Show = () => {
                 onClick={(e) => handleRemoveTask(e, task._id)}
               />
               <h1 className="text-xl">
-                <span className=" font-semibold text-blue-700"> Title : </span>
+                <span className=" font-semibold text-black"> Title : </span>
                 {task.title}
               </h1>
               <p>
-                <span className=" font-semibold text-blue-700">Content : </span>
+                <span className=" font-semibold text-black">Content : </span>
                 {task.content}
               </p>
               <p>
-                <span className=" font-semibold text-blue-700">Status : </span>
+                <span className=" font-semibold text-black">Status : </span>
                 {task.status}
               </p>
               <p>
-                <span className=" font-semibold text-blue-700">
+                <span className=" font-semibold text-black">
                   Created Timestamp :{" "}
                 </span>
                 {task.createdAt}
