@@ -57,12 +57,14 @@ const Show = () => {
       )}
       {!load && TaskData.length === 0 && (
         <div>
-          <h1>No Task is added</h1>
+          <h1 className="font-semibold text-center">No Task is added</h1>
         </div>
       )}
       <div className="flex flex-col gap-3 w-full">
         <h2 className="font-semibold text-center">
-          {!load && `Your All Tasks(${TaskData.length})`}
+          {!load &&
+            TaskData.length !== 0 &&
+            `Your All Tasks(${TaskData.length})`}
         </h2>
         {TaskData &&
           TaskData.map((task) => (
