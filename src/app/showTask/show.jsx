@@ -62,7 +62,10 @@ const Show = () => {
       <div className=" flex flex-col gap-3">
         {TaskData &&
           TaskData.map((task) => (
-            <div key={task._id} className="bg-gray-200 text-black p-5 relative">
+            <div
+              key={task._id}
+              className="bg-gray-200 text-black p-5 relative hover:bg-gray-300 "
+            >
               <FaDeleteLeft
                 size={30}
                 className="text-red-700 absolute top-0 right-0 m-3 cursor-pointer"

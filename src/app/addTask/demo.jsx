@@ -4,8 +4,10 @@ import loginSVG from "../../../public/loginSVG.svg";
 import TaskSVG from "../../../public/addTaskSVG.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const Demo = () => {
+  const router = useRouter();
   const [load, setLoad] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,6 +34,7 @@ const Demo = () => {
       const data = await res.json();
       //console.log(data);
       toast.success("your task is added", { position: "top-center" });
+      router.push("/showTask");
       setTitle("");
       setContent("");
       setStatus("");

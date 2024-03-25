@@ -42,11 +42,7 @@ const Navbar = () => {
             height={50}
           />
         </Link>
-        {user ? (
-          <h1 className="text-3xl font-semibold">{user.name}</h1>
-        ) : (
-          <h1 className="text-3xl font-semibold">User</h1>
-        )}
+        <h1 className="text-3xl">Work </h1>
       </div>
       {user && (
         <div className="hidden lg:flex">
@@ -98,18 +94,12 @@ const Navbar = () => {
         )}
         {user && (
           <div>
-            <form className="flex items-center gap-2 text-white">
-              <input
-                type="text"
-                placeholder="Search..."
-                name="searchbox"
-                className="w-40 px-2 py-1 rounded-lg focus:outline-none border border-gray-500 bg-transparent"
-              />
-              <button className="bg-green-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80">
-                Search
-              </button>
+            <form className="flex items-center gap-3 text-white">
+              <h1 className="text-2xl font-semibold text-blue-900">
+                {user.email}
+              </h1>
               <button
-                className="bg-blue-600 cursor-pointer px-2 py-1 rounded-lg hover:opacity-80"
+                className="bg-blue-600 cursor-pointer px-3 py-2 rounded-lg hover:opacity-80"
                 onClick={logOut}
               >
                 log Out
