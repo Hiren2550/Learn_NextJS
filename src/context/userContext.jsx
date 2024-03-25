@@ -8,6 +8,7 @@ export const userContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [nav, setNav] = useState(true);
 
   useEffect(() => {
     const fetchuser = async () => {
@@ -27,7 +28,7 @@ export const UserProvider = ({ children }) => {
     fetchuser();
   }, [children]);
   return (
-    <userContext.Provider value={{ user, setUser }}>
+    <userContext.Provider value={{ user, setUser, nav, setNav }}>
       {children}
     </userContext.Provider>
   );

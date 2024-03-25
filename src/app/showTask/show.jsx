@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { toast } from "react-toastify";
-import swal from "sweetalert";
 
 const Show = () => {
   //console.log("show page");
@@ -14,6 +13,7 @@ const Show = () => {
   //console.log(TaskData);
 
   const context = useContext(userContext);
+  //console.log(context.nav);
   const router = useRouter();
   useEffect(() => {
     const fetchingData = async () => {
@@ -67,6 +67,7 @@ const Show = () => {
             `Your All Tasks(${TaskData.length})`}
         </h2>
         {TaskData &&
+          context.nav &&
           TaskData.map((task) => (
             <div
               key={task._id}

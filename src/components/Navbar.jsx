@@ -8,9 +8,8 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const { user } = useContext(userContext);
+  const { user, nav, setNav } = useContext(userContext);
   const router = useRouter();
-  const [nav, setNav] = useState(true);
 
   const logOut = async (e) => {
     e.preventDefault();
